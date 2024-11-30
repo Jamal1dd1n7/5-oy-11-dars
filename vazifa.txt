@@ -1,0 +1,72 @@
+FN27 uy ishi
+
+Vazifani pythonda bajaring.
+
+Quyida sizga PostgreSQL ma'lumotlar bazasida ishlash uchun topshiriqlar ro‘yxati berilgan. Ushbu topshiriqlarda jadvallar yaratish, ma’lumotlar qo‘shish, o‘zgartirish, va turli buyruqlar qo‘llanishi talab qilinadi.
+
+1. Jadvallarni yaratish
+Quyidagi jadvallarni yarating:
+
+1. `categories` jadvali quyidagi ustunlardan iborat bo‘lsin:
+   - `id` — birlamchi kalit (SERIAL).
+   - `name` — kategoriyaning nomi (VARCHAR, 100 belgigacha, bo‘sh bo‘lmasligi kerak).
+   - `description` — kategoriyaning tavsifi (TEXT, bo‘lishi shart emas).
+
+2. `news` jadvali quyidagi ustunlardan iborat bo‘lsin:
+   - `id` — birlamchi kalit (SERIAL).
+   - `category_id` — kategoriyaning ID-si (foreign key).
+   - `title` — yangilik sarlavhasi (VARCHAR, 200 belgigacha, bo‘sh bo‘lmasligi kerak).
+   - `content` — yangilik matni (TEXT, bo‘sh bo‘lmasligi kerak).
+   - `published_at` — e’lon qilingan sana (TIMESTAMP, hozirgi sana vaqti bo‘lsin).
+   - `is_published` — yangilik e’lon qilingan yoki yo‘qligini bildiradi (BOOLEAN, standart qiymati FALSE).
+
+3. `comments` jadvali quyidagi ustunlardan iborat bo‘lsin:
+   - `id` — birlamchi kalit (SERIAL).
+   - `news_id` — yangilikning ID-si (foreign key).
+   - `author_name` — sharh muallifining ismi (VARCHAR, 100 belgigacha).
+   - `comment_text` — sharh matni (TEXT, bo‘sh bo‘lmasligi kerak).
+   - `created_at` — sharh qo‘shilgan vaqt (TIMESTAMP, hozirgi sana vaqti bo‘lsin).
+
+2. `ALTER TABLE` buyrug‘idan foydalanish
+Quyidagi o‘zgartirishlarni amalga oshiring:
+
+- `news` jadvaliga `views` nomli ustun qo‘shing (INTEGER, standart qiymati 0 bo‘lsin).
+- `comments` jadvalida `author_name` ustunining turini `TEXT` qilib o‘zgartiring.
+
+3. Jadvallarga ma’lumot qo‘shish (INSERT INTO)
+Yuqorida yaratilgan jadvallar kamida 3 ta yozuv qo‘shing:
+
+- `categories` jadvaliga kamida 3 ta turli kategoriyalar qo‘shing (masalan: Technology, Sports, Health).
+- `news` jadvaliga har bir kategoriya uchun kamida 1 ta yangilik qo‘shing.
+- `comments` jadvaliga har bir yangilik uchun kamida 1 ta sharh qo‘shing.
+
+4. Ma’lumotlarni yangilash (UPDATE)
+Quyidagi vazifalarni bajaring:
+
+- Barcha yangiliklarning ko‘rish sonini `1` taga oshiring.
+- E’lon qilingan va sanasi 1 kundan eski bo‘lgan yangiliklar uchun `is_published` ustunini TRUE ga o‘zgartiring.
+
+5. Ma’lumotlarni o‘chirish (DELETE)
+Quyidagi vazifalarni bajaring:
+
+- 1 yildan eski sharhlarni o‘chiring.
+
+6. Ma’lumotlarni tanlash (SELECT)
+Quyidagi topshiriqlarni bajaring:
+
+- Alias ishlatib, `news` jadvalidan yangiliklar ID-si, sarlavhasi va kategoriyasini tanlang.
+- `Technology` kategoriyasidagi barcha yangiliklarni tanlang.
+- E’lon qilingan yangiliklar ro‘yxatini so‘nggi qo‘shilganidan boshlab tartiblab, eng yuqori 5 ta yangilikni tanlang.
+- Ko‘rish soni `10` va `100` orasidagi yangiliklarni tanlang.
+- Muallif ismi 'A' harfi bilan boshlanadigan sharhlarni tanlang.
+- Muallif ismi bo‘sh bo‘lgan sharhlarni tanlang.
+- Har bir kategoriyadagi yangiliklar sonini hisoblab chiqaring.
+
+7. Qo‘shimcha cheklovlar qo‘shish
+Quyidagi cheklovlarni qo‘shing:
+
+- `news` jadvalidagi `title` ustuniga noyob cheklov qo‘shing.
+
+
+Vazifani GitHuga yuklang.
+
